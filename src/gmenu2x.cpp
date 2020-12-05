@@ -198,7 +198,7 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 	 * https://github.com/mthuurne/opendingux-buildroot/blob
 	 * 			/opendingux-2010.11/package/sdl/sdl-fbcon-clear-onexit.patch
 	 */
-	setenv("SDL_FBCON_DONT_CLEAR", "1", 0);
+	// setenv("SDL_FBCON_DONT_CLEAR", "1", 0);
 
 	if( SDL_Init(SDL_INIT_TIMER) < 0) {
 		ERROR("Could not initialize SDL: %s\n", SDL_GetError());
