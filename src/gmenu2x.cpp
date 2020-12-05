@@ -97,6 +97,7 @@ static const std::pair<unsigned int, unsigned int> supported_resolutions[] = {
 	{ 800, 480 },
 	{ 640, 480 },
 	{ 320, 240 },
+	{ 240, 240 },
 	{ 240, 160 },
 };
 
