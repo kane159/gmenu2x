@@ -70,11 +70,11 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#define DEFAULT_FONT_PATH "/usr/share/fonts/dejavu/DejaVuSansCondensed.ttf"
+#define DEFAULT_FONT_PATH "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf"
 #define DEFAULT_FONT_SIZE 12
 
 #ifndef DEFAULT_FALLBACK_FONTS
-#define DEFAULT_FALLBACK_FONTS ,{"/usr/share/fonts/droid/DroidSansFallbackFull.ttf",13},{"/usr/share/fonts/droid/DroidSansFallback.ttf",13}
+#define DEFAULT_FALLBACK_FONTS ,{"/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",13},{"/usr/share/fonts/truetype/droid/DroidSansFallback.ttf",13}
 #endif
 
 using namespace std;
