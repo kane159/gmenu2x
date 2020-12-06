@@ -34,6 +34,11 @@ if (SCREEN_HEIGHT)
 	add_compile_definitions(G2X_BUILD_OPTION_SCREEN_HEIGHT=${SCREEN_HEIGHT})
 endif ()
 
+set(SCREEN_DEPTH "" CACHE STRING "Screen / window depth (empty: max available)")
+if (SCREEN_DEPTH)
+	add_compile_definitions(G2X_BUILD_OPTION_SCREEN_DEPTH=${SCREEN_DEPTH})
+endif ()
+
 set(DEFAULT_FALLBACK_FONTS "" CACHE STRING "A list of fallback font paths")
 if(DEFAULT_FALLBACK_FONTS)
 	add_compile_definitions(DEFAULT_FALLBACK_FONTS=${DEFAULT_FALLBACK_FONTS})

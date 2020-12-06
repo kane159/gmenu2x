@@ -218,8 +218,8 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 
 	SDL_WM_SetCaption("GMenu2X", nullptr);
 
-#if defined(G2X_BUILD_OPTION_SCREEN_WIDTH) && defined(G2X_BUILD_OPTION_SCREEN_HEIGHT)
-	s = OutputSurface::open(G2X_BUILD_OPTION_SCREEN_WIDTH, G2X_BUILD_OPTION_SCREEN_HEIGHT, 0);
+#if defined(G2X_BUILD_OPTION_SCREEN_WIDTH) && defined(G2X_BUILD_OPTION_SCREEN_HEIGHT) && defined(G2X_BUILD_OPTION_SCREEN_DEPTH)
+	s = OutputSurface::open(G2X_BUILD_OPTION_SCREEN_WIDTH, G2X_BUILD_OPTION_SCREEN_HEIGHT, G2X_BUILD_OPTION_SCREEN_DEPTH);
 #else
 	// find largest resolution available
 	for (const auto res : supported_resolutions) {
