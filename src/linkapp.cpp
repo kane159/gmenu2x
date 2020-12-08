@@ -175,6 +175,14 @@ LinkApp::LinkApp(GMenu2X& gmenu2x, string const& linkfile, bool deletable)
 				}
 
 				continue;
+			} else if (!strncmp(key, "SelectorFilter", lkey)) {
+				string filter = buf;
+
+				setSelectorFilter(filter);
+			} else if (!strncmp(key, "SelectorDir", lkey)) {
+				string dir = buf;
+
+				setSelectorDir(dir);
 			}
 
 #ifdef HAVE_LIBXDGMIME
@@ -237,6 +245,8 @@ LinkApp::LinkApp(GMenu2X& gmenu2x, string const& linkfile, bool deletable)
 			if (appTakesFileArg) setSelectorDir(value);
 		} else if (name == "selectorbrowser") {
 			if (value=="false") selectorbrowser = false;
+		} else if (name == "selectorfilter") {
+			setSelectorFilter( value );
 		} else if (!isOpk()) {
 			if (name == "title") {
 				setTitle(value);
