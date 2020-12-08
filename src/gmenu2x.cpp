@@ -174,7 +174,7 @@ void GMenu2X::run() {
 	delete menu;
 
 	SDL_Quit();
-	unsetenv("SDL_FBCON_DONT_CLEAR");
+	//unsetenv("SDL_FBCON_DONT_CLEAR");
 
 	if (toLaunch) {
 		toLaunch->exec();
