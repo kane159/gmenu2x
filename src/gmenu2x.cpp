@@ -190,7 +190,7 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 	usbnet = samba = inet = web = false;
 	useSelectionPng = false;
 
-	powerSaver = PowerSaver::getInstance();
+	//powerSaver = PowerSaver::getInstance();
 
 	/* Do not clear the screen on exit.
 	 * This may require an SDL patch available at
@@ -273,7 +273,7 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 		exit(EXIT_FAILURE);
 	}
 
-	powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
+	//powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
 }
 
 GMenu2X::~GMenu2X() {
