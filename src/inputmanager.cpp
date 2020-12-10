@@ -291,7 +291,7 @@ bool InputManager::getButton(Button *button, bool wait) {
 		return false;
 
 	if (wait)
-		PowerSaver::getInstance()->resetScreenTimer();
+		// PowerSaver::getInstance()->resetScreenTimer();
 
 	return true;
 }

@@ -685,7 +685,7 @@ void GMenu2X::showSettings() {
 	}
 
 	if (sd.exec()) {
-		powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
+		//powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
 
 		input.repeatRateChanged();
 		if (brightnessmanager->available())

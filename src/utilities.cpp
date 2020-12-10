@@ -239,8 +239,8 @@ int intTransition(int from, int to, long tickStart, long duration, long tickNow)
 
 void request_repaint()
 {
-	if (!PowerSaver::getInstance()->getScreenState())
-		return;
+	// if (!PowerSaver::getInstance()->getScreenState())
+		// return;
 
 	SDL_UserEvent e = { SDL_USEREVENT };
 

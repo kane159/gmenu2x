@@ -147,7 +147,7 @@ public:
 		return std::make_pair(top, s->height() - top - bottom);
 	}
 
-	std::shared_ptr<PowerSaver> powerSaver;
+	//std::shared_ptr<PowerSaver> powerSaver;
 	InputManager input;
 #ifdef ENABLE_CPUFREQ
 	Cpu cpu;
