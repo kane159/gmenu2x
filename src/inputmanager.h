@@ -50,12 +50,12 @@ public:
 		UP, DOWN, LEFT, RIGHT,
 		ACCEPT, CANCEL,
 		ALTLEFT, ALTRIGHT,
-		MENU, SETTINGS,
+		MENU, SETTINGS, HOME,
 		// Events that are not actually buttons:
 		// (not included in BUTTON_TYPE_SIZE)
 		REPAINT, QUIT,
 	};
-	static constexpr size_t BUTTON_TYPE_SIZE = 10;
+	static constexpr size_t BUTTON_TYPE_SIZE = 13;
 
 	InputManager(GMenu2X& gmenu2x);
 	~InputManager();

@@ -47,6 +47,7 @@ endif ()
 set(CARD_ROOT "/media" CACHE STRING "Top-level filesystem directory")
 
 find_package(SDL REQUIRED)
+find_package(SDL_image REQUIRED)
 find_package(SDL_ttf REQUIRED)
 find_package(PNG REQUIRED)
 
@@ -100,6 +101,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 					  ${SDL_LIBRARY}
+					  ${SDL_IMAGE_LIBRARIES}
 					  ${SDL_TTF_LIBRARIES}
 					  ${LIBSDL_GFX_LIBRARIES}
 					  ${PNG_LIBRARIES}
@@ -110,6 +112,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 target_include_directories(${PROJECT_NAME} PRIVATE
 						   ${SDL_INCLUDE_DIR}
+						   ${SDL_IMAGE_INCLUDE_DIR}
 						   ${SDL_TTF_INCLUDE_DIRS}
 						   ${PNG_INCLUDE_DIRS}
 						   ${LIBOPK_INCLUDE_DIRS}

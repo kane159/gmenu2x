@@ -76,6 +76,9 @@ public:
 	void rectangle(Sint16 x, Sint16 y, Uint16 w, Uint16 h, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		rectangle(SDL_Rect{ x, y, w, h }, RGBAColor(r, g, b, a));
 	}
+	SDL_Surface *getSurface() {
+		return raw;
+	}
 
 protected:
 	Surface(SDL_Surface *raw) : raw(raw) {}

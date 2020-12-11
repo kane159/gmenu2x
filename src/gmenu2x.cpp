@@ -27,6 +27,7 @@
 #include "filelister.h"
 #include "font_stack.h"
 #include "font_spec.h"
+#include "funkeymenu.h"
 #include "gmenu2x.h"
 #include "helppopup.h"
 #include "iconbutton.h"
@@ -273,11 +274,18 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 		exit(EXIT_FAILURE);
 	}
 
+    // Init FunkeyMenu
+    FunkeyMenu::init( *this );
+
 	//powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
 }
 
 GMenu2X::~GMenu2X() {
 	fflush(NULL);
+
+    // Deinit FunkeyMenu
+    FunkeyMenu::end( );
+
 	sc.clear();
 
 #ifdef ENABLE_INOTIFY
@@ -604,9 +612,23 @@ void GMenu2X::mainLoop() {
 			gotEvent = input.getButton(&button, wait);
 		} while (wait && !gotEvent);
 		if (gotEvent) {
+
+			/** Global button mapping: HOME */
+			if (button == InputManager::HOME) {
+				printf("Launch FunKey menu\n");
+				int res = FunkeyMenu::launch();
+				if(res == MENU_RETURN_EXIT){
+	                button = InputManager::QUIT;
+	            }
+			}
+
+			/** Global button mapping: QUIT */
 			if (button == InputManager::QUIT) {
+				// Exit main loop here
 				break;
 			}
+
+			/** Check button Mapping by layer instances */
 			for (auto it = layers.rbegin(); it != layers.rend(); ++it) {
 				if ((*it)->handleButtonPress(button)) {
 					break;
