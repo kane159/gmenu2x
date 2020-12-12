@@ -29,8 +29,11 @@
 
 using namespace std;
 
-#define KEY_WIDTH 20
-#define KEY_HEIGHT 20
+//#define KEY_WIDTH 20
+//#define KEY_HEIGHT 20
+#define KEY_WIDTH 18
+#define KEY_HEIGHT 18
+#define KEY_XOFFSET 121
 #define KB_TOP 90
 
 static bool utf8Code(unsigned char c)
@@ -129,7 +132,7 @@ void InputDialog::setKeyboard(int kb) {
 		}
 	}
 
-	kbLeft = 160 - kbLength * KEY_WIDTH / 2;
+	kbLeft = KEY_XOFFSET - kbLength * KEY_WIDTH / 2;
 	kbWidth = kbLength * KEY_WIDTH + 3;
 	kbHeight = (this->kb->size() + 1) * KEY_HEIGHT + 3;
 
@@ -162,7 +165,7 @@ bool InputDialog::exec() {
 		bg.blit(s, 0, 0);
 
 		box.w = gmenu2x.font->getTextWidth(input) + 18;
-		box.x = 160 - box.w / 2;
+		box.x = KEY_XOFFSET - box.w / 2;
 		s.box(box.x, box.y, box.w, box.h,
 		gmenu2x.skinConfColors[COLOR_SELECTION_BG]);
 		s.rectangle(box.x, box.y, box.w, box.h,
@@ -324,14 +327,14 @@ void InputDialog::drawVirtualKeyboard() {
 	};
 	s.rectangle(re, gmenu2x.skinConfColors[COLOR_SELECTION_BG]);
 	gmenu2x.font->write(s, gmenu2x.tr["Cancel"],
-			(int)(160 - kbLength * KEY_WIDTH / 4),
+			(int)(KEY_XOFFSET - kbLength * KEY_WIDTH / 4),
 			KB_TOP + kb->size() * KEY_HEIGHT + KEY_HEIGHT / 2,
 			Font::HAlignCenter, Font::VAlignMiddle);
 
 	re.x = kbLeft + kbLength * KEY_WIDTH / 2 - 1;
 	s.rectangle(re, gmenu2x.skinConfColors[COLOR_SELECTION_BG]);
 	gmenu2x.font->write(s, gmenu2x.tr["OK"],
-			(int)(160 + kbLength * KEY_WIDTH / 4),
+			(int)(KEY_XOFFSET + kbLength * KEY_WIDTH / 4),
 			KB_TOP + kb->size() * KEY_HEIGHT + KEY_HEIGHT / 2,
 			Font::HAlignCenter, Font::VAlignMiddle);
 }
