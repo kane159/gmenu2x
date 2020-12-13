@@ -348,14 +348,19 @@ void FunkeyMenu::add_menu_zone(ENUM_MENU_TYPE menu_type){
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);*/
 		break;
-	/*case MENU_TYPE_THEME:
-		MENU_DEBUG_PRINTF("Init MENU_TYPE_THEME\n");
+	case MENU_TYPE_LAUNCHER:
+		MENU_DEBUG_PRINTF("Init MENU_TYPE_LAUNCHER\n");
 		/// ------ Text ------
-		text_surface = TTF_RenderText_Blended(menu_title_font, "SET THEME", text_color);
+		text_surface = TTF_RenderText_Blended(menu_title_font, "SET LAUNCHER", text_color);
 		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 - padding_y_from_center_menu_zone*2;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
-		break;*/
+		/// ------ Text ------
+		text_surface = TTF_RenderText_Blended(menu_title_font, "RETROFE", text_color);
+		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
+		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2;
+		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
+		break;
 	case MENU_TYPE_POWERDOWN:
 		MENU_DEBUG_PRINTF("Init MENU_TYPE_POWERDOWN\n");
 		/// ------ Text ------
@@ -388,8 +393,8 @@ void FunkeyMenu::init_menu_zones(){
 	//add_menu_zone(MENU_TYPE_EXIT);
 	/// Init USB Menu
 	add_menu_zone(MENU_TYPE_USB);
-	/*/// Init Theme Menu
-	add_menu_zone(MENU_TYPE_THEME);*/
+	/// Init Launcher Menu
+	add_menu_zone(MENU_TYPE_LAUNCHER);
 	/// Init Powerdown Menu
 	add_menu_zone(MENU_TYPE_POWERDOWN);
 }
@@ -611,22 +616,7 @@ void FunkeyMenu::menu_screen_refresh(int menuItem, int prevItem, int scroll, uin
 			}
 			break;
 
-		/*case MENU_TYPE_THEME:
-			/// ---- Write current chosen theme -----
-			curLayoutName = (char*)getFileName(config->layouts_.at(indexChooseLayout)).c_str();
-
-			// no more than max_chars chars in name to fit screen
-			if(strlen(curLayoutName) > max_chars){
-				curLayoutName[max_chars-2] = 0;
-				dots = true;
-			}
-			sprintf(text_tmp, "< %s%s >", curLayoutName, dots?"...":"" );
-
-			text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
-			text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
-			text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2;
-			SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
-
+		case MENU_TYPE_LAUNCHER:
 			if(menu_action){
 				sprintf(text_tmp, "In progress...");
 				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
@@ -641,7 +631,7 @@ void FunkeyMenu::menu_screen_refresh(int menuItem, int prevItem, int scroll, uin
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
 			}
-			break;*/
+			break;
 
 		case MENU_TYPE_EXIT:
 		case MENU_TYPE_POWERDOWN:
@@ -877,7 +867,7 @@ int FunkeyMenu::launch( )
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
 						}
-						/*else if(idx_menus[menuItem] == MENU_TYPE_THEME){
+						/*else if(idx_menus[menuItem] == MENU_TYPE_LAUNCHER){
 							MENU_DEBUG_PRINTF("Theme previous\n");
 							
 							/// ------ Refresh screen ------
@@ -937,7 +927,7 @@ int FunkeyMenu::launch( )
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
 						}
-						/*else if(idx_menus[menuItem] == MENU_TYPE_THEME){
+						/*else if(idx_menus[menuItem] == MENU_TYPE_LAUNCHER){
 							MENU_DEBUG_PRINTF("Theme previous\n");
 
 							/// ------ Refresh screen ------
@@ -1013,23 +1003,27 @@ int FunkeyMenu::launch( )
 								screen_refresh = 1;
 							}
 						}
-						/*else if(idx_menus[menuItem] == MENU_TYPE_THEME){
+						else if(idx_menus[menuItem] == MENU_TYPE_LAUNCHER){
 							if(menu_confirmation){
-								MENU_DEBUG_PRINTF("Theme change - confirmed\n");
+								MENU_DEBUG_PRINTF("Lancher change - confirmed\n");
 
 								/// ------ Refresh Screen -------
 								menu_screen_refresh(menuItem, prevItem, scroll, menu_confirmation, 1);
+
+								/// ----- Shell cmd ----
+								MENU_DEBUG_PRINTF("Running command: %s\n", SHELL_CMD_SET_LAUNCHER_RETROFE);
+								executeRawPath(SHELL_CMD_SET_LAUNCHER_RETROFE);
 
 								stop_menu_loop = 1;
 								returnCode = MENU_RETURN_EXIT;
 							}
 							else{
-								MENU_DEBUG_PRINTF("Theme change - asking confirmation\n");
+								MENU_DEBUG_PRINTF("Launcher change - asking confirmation\n");
 								menu_confirmation = 1;
 								/// ------ Refresh screen ------
 								screen_refresh = 1;
 							}
-						}*/
+						}
 						else if(idx_menus[menuItem] == MENU_TYPE_EXIT){
 							MENU_DEBUG_PRINTF("Exit game\n");
 							if(menu_confirmation){
