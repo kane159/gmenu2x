@@ -122,6 +122,40 @@ static void quit_all(int err) {
 	exit(err);
 }
 
+/* Quick save and turn off the console */
+static void quick_poweroff()
+{
+    /* Vars */
+    char shell_cmd[200];
+    FILE *fp;
+
+    /* Send command to kill any previously scheduled shutdown */
+    sprintf(shell_cmd, "pkill %s", SHELL_CMD_SCHEDULE_POWERDOWN);
+    fp = popen(shell_cmd, "r");
+    if (fp == NULL) {
+        ERROR("Failed to run command %s\n", shell_cmd);
+    }
+
+    /* Clean Poweroff */
+    sprintf(shell_cmd, "%s", SHELL_CMD_POWERDOWN);
+    fp = popen(shell_cmd, "r");
+    if (fp == NULL) {
+        ERROR("Failed to run command %s\n", shell_cmd);
+    }
+}
+
+/* Handler for SIGUSR1, caused by closing the console */
+static void handle_sigusr1(int sig)
+{
+    printf("Caught signal USR1 %d\n", sig);
+
+    /* Exit menu if it was launched */
+    FunkeyMenu::stop();
+
+    /** Poweroff */
+    quick_poweroff();
+}
+
 const string GMenu2X::getHome()
 {
 	return gmenu2x_home;
@@ -142,6 +176,7 @@ int main(int /*argc*/, char * /*argv*/[]) {
 	set_handler(SIGINT, &quit_all);
 	set_handler(SIGSEGV, &quit_all);
 	set_handler(SIGTERM, &quit_all);
+	set_handler(SIGUSR1, &handle_sigusr1);
 
 	char *home = getenv("HOME");
 	if (home == NULL) {
