@@ -125,23 +125,24 @@ static void quit_all(int err) {
 /* Quick save and turn off the console */
 static void quick_poweroff()
 {
-    /* Vars */
-    char shell_cmd[200];
-    FILE *fp;
-
-    /* Send command to kill any previously scheduled shutdown */
-    sprintf(shell_cmd, "pkill %s", SHELL_CMD_SCHEDULE_POWERDOWN);
-    fp = popen(shell_cmd, "r");
-    if (fp == NULL) {
-        ERROR("Failed to run command %s\n", shell_cmd);
+	/* Send command to cancel any previously scheduled powerdown */
+    if (popen(SHELL_CMD_CANCEL_SCHED_POWERDOWN, "r") == NULL)
+    {
+        /* Countdown is still ticking, so better do nothing
+		   than start writing and get interrupted!
+		*/
+	    printf("Failed to cancel scheduled shutdown\n");
+		exit(0);
     }
 
-    /* Clean Poweroff */
-    sprintf(shell_cmd, "%s", SHELL_CMD_POWERDOWN);
-    fp = popen(shell_cmd, "r");
-    if (fp == NULL) {
-        ERROR("Failed to run command %s\n", shell_cmd);
-    }
+    /* Perform Instant Play save and shutdown */
+    execlp(SHELL_CMD_POWERDOWN, SHELL_CMD_POWERDOWN);
+
+    /* Should not be reached */
+    printf("Failed to perform Instant Play save and shutdown\n");
+
+    /* Exit Emulator */
+    exit(0);
 }
 
 /* Handler for SIGUSR1, caused by closing the console */
