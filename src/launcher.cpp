@@ -1,5 +1,5 @@
 #include "launcher.h"
-
+#include "funkeymenu.h"
 #include "debug.h"
 
 #include <cerrno>
@@ -32,6 +32,10 @@ Launcher::Launcher(vector<string> && commandLine, bool consoleApp)
 
 void Launcher::exec()
 {
+
+    /* Start audio amp */
+    popen(SHELL_CMD_TURN_AMPLI_ON, "r");
+
 	if (consoleApp) {
 #ifdef BIND_CONSOLE
 		/* Enable the framebuffer console */
@@ -55,12 +59,15 @@ void Launcher::exec()
 #endif
 	}
 
+	INFO("Launching '");
 	vector<const char *> args;
 	args.reserve(commandLine.size() + 1);
 	for (auto arg : commandLine) {
 		args.push_back(strdup(arg.c_str()));
+		INFO("%s ", args.back() );
 	}
 	args.push_back(nullptr);
+	INFO("'\n");
 
 	execvp(commandLine[0].c_str(), (char * const *)args.data());
 	WARNING("Failed to exec '%s': %s\n",

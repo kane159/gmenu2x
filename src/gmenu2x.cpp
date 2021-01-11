@@ -178,6 +178,9 @@ int main(int /*argc*/, char * /*argv*/[]) {
 	set_handler(SIGTERM, &quit_all);
 	set_handler(SIGUSR1, &handle_sigusr1);
 
+    /* Stop Ampli */
+    popen(SHELL_CMD_TURN_AMPLI_OFF, "r");
+
 	char *home = getenv("HOME");
 	if (home == NULL) {
 		ERROR("Unable to find gmenu2x home directory. The $HOME variable is not defined.\n");

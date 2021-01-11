@@ -55,6 +55,8 @@ typedef enum {ASPECT_RATIOS} ENUM_ASPECT_RATIOS_TYPES;
 #define SHELL_CMD_SCHEDULE_POWERDOWN        "sched_shutdown"
 #define SHELL_CMD_SET_LAUNCHER_GMENU2X      "set_launcher gmenu2x"
 #define SHELL_CMD_SET_LAUNCHER_RETROFE      "set_launcher retrofe"
+#define SHELL_CMD_TURN_AMPLI_ON             "start_audio_amp 1"
+#define SHELL_CMD_TURN_AMPLI_OFF            "start_audio_amp 0"
 
 class FunkeyMenu
 {
