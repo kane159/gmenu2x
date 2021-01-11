@@ -94,8 +94,10 @@ Menu::Menu(GMenu2X& gmenu2x)
 				if (!strcmp(dptr->d_name, ".") || !strcmp(dptr->d_name, ".."))
 					continue;
 
+				/*openPackagesFromDir((string) GMENU2X_CARD_ROOT "/"
+						    + dptr->d_name + "/apps");*/
 				openPackagesFromDir((string) GMENU2X_CARD_ROOT "/"
-						    + dptr->d_name + "/apps");
+						    + dptr->d_name );
 			}
 			closedir(dirp);
 		}
