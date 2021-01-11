@@ -31,7 +31,8 @@ void MediaMonitor::inject_event(bool is_add, const char *path)
 	sleep(1);
 
 	if (is_add)
-		menu->openPackagesFromDir(((string)path + "/apps").c_str());
+		//menu->openPackagesFromDir(((string)path + "/apps").c_str());
+		menu->openPackagesFromDir(((string)path).c_str());
 	else
 		menu->removePackageLink(path);
 
