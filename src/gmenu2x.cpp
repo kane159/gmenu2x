@@ -139,7 +139,7 @@ static void quick_poweroff()
     execlp(SHELL_CMD_POWERDOWN, SHELL_CMD_POWERDOWN);
 
     /* Should not be reached */
-    printf("Failed to perform Instant Play save and shutdown\n");
+    printf("Failed to perform shutdown\n");
 
     /* Exit Emulator */
     exit(0);
