@@ -70,6 +70,7 @@
 //for browsing the filesystem
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <dirent.h>
 
 #define DEFAULT_FONT_PATH "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf"
 #define DEFAULT_FONT_SIZE 12
@@ -656,9 +657,27 @@ void GMenu2X::mainLoop() {
 			if (button == InputManager::HOME) {
 				printf("Launch FunKey menu\n");
 				int res = FunkeyMenu::launch();
-				if(res == MENU_RETURN_EXIT){
-	                button = InputManager::QUIT;
-	            }
+				if (res == MENU_RETURN_EXIT) {
+					button = InputManager::QUIT;
+				}
+#ifdef HAVE_LIBOPK
+				{
+					DIR *dirp = opendir(GMENU2X_CARD_ROOT);
+					if (dirp) {
+						struct dirent *dptr;
+						while ((dptr = readdir(dirp))) {
+							if (dptr->d_type != DT_DIR)
+								continue;
+
+							if (!strcmp(dptr->d_name, ".") || !strcmp(dptr->d_name, ".."))
+								continue;
+
+							menu.get()->openPackagesFromDir((string) GMENU2X_CARD_ROOT "/" + dptr->d_name );
+						}
+						closedir(dirp);
+					}
+				}
+#endif
 			}
 
 			/** Global button mapping: QUIT */
