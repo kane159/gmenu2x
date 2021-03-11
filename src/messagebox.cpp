@@ -108,16 +108,20 @@ int MessageBox::exec() {
 	bg.blit(s, 0, 0);
 	s.flip();
 
-	int result = -1;
+	/*int result = -1;
 	while (result < 0) {
 		InputManager::Button button;
 		if (gmenu2x.input.pollButton(&button)
 				&& !buttons[button].empty()) {
 			result = button;
 		}
+		if (gmenu2x.input.waitForPressedButton(&button)
+				&& !buttons[button].empty()) {
+			result = button;
+		}
 
 		std::this_thread::sleep_for(std::chrono::microseconds(LOOP_DELAY));
-	}
+	}*/
 
-	return result;
+	return gmenu2x.input.waitForPressedButton();
 }
