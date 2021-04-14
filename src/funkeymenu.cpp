@@ -411,6 +411,7 @@ void FunkeyMenu::init_menu_system_values(){
 		volume_percentage = 50; ///wrong value: setting default to 50
 	}
 	else{
+		pclose(fp);
 		fgets(res, sizeof(res)-1, fp);
 
 		/// Check if Volume is a number (at least the first char)
@@ -431,6 +432,7 @@ void FunkeyMenu::init_menu_system_values(){
 		brightness_percentage = 50; ///wrong value: setting default to 50
 	}
 	else{
+		pclose(fp);
 		fgets(res, sizeof(res)-1, fp);
 
 		/// Check if brightness is a number (at least the first char)
@@ -828,6 +830,8 @@ int FunkeyMenu::launch( )
 							fp = popen(shell_cmd, "r");
 							if (fp == NULL) {
 								MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
+							} else {
+								pclose(fp);
 							}
 
 							/// ------ Refresh screen ------
@@ -844,6 +848,8 @@ int FunkeyMenu::launch( )
 							fp = popen(shell_cmd, "r");
 							if (fp == NULL) {
 								MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
+							} else {
+								pclose(fp);
 							}
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
@@ -889,6 +895,8 @@ int FunkeyMenu::launch( )
 							fp = popen(shell_cmd, "r");
 							if (fp == NULL) {
 								MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
+							} else {
+								pclose(fp);
 							}
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
@@ -904,6 +912,8 @@ int FunkeyMenu::launch( )
 							fp = popen(shell_cmd, "r");
 							if (fp == NULL) {
 								MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
+							} else {
+								pclose(fp);
 							}
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
@@ -982,6 +992,7 @@ int FunkeyMenu::launch( )
 									MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
 								}
 								else{
+									pclose(fp);
 									usb_sharing = !usb_sharing;
 								}*/
 
@@ -1053,6 +1064,8 @@ int FunkeyMenu::launch( )
 								fp = popen(shell_cmd, "r");
 								if (fp == NULL) {
 									MENU_ERROR_PRINTF("Failed to run command %s\n", shell_cmd);
+								} else {
+									pclose(fp);
 								}
 
 								return MENU_RETURN_EXIT;

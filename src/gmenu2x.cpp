@@ -126,14 +126,19 @@ static void quit_all(int err) {
 /* Quick save and turn off the console */
 static void quick_poweroff()
 {
-	/* Send command to cancel any previously scheduled powerdown */
-    if (popen(SHELL_CMD_CANCEL_SCHED_POWERDOWN, "r") == NULL)
+    FILE *fp;
+
+    /* Send command to cancel any previously scheduled powerdown */
+    fp = popen(SHELL_CMD_CANCEL_SCHED_POWERDOWN, "r");
+    if (fp == NULL)
     {
         /* Countdown is still ticking, so better do nothing
 		   than start writing and get interrupted!
 		*/
 	    printf("Failed to cancel scheduled shutdown\n");
 		exit(0);
+    } else {
+        pclose(fp);
     }
 
     /* Perform Instant Play save and shutdown */
@@ -173,6 +178,8 @@ static void set_handler(int signal, void (*handler)(int))
 }
 
 int main(int /*argc*/, char * /*argv*/[]) {
+	FILE *fp;
+
 	INFO("---- GMenu2X starting ----\n");
 
 	set_handler(SIGINT, &quit_all);
@@ -180,8 +187,11 @@ int main(int /*argc*/, char * /*argv*/[]) {
 	set_handler(SIGTERM, &quit_all);
 	set_handler(SIGUSR1, &handle_sigusr1);
 
-    /* Stop Ampli */
-    popen(SHELL_CMD_TURN_AMPLI_OFF, "r");
+	/* Stop Ampli */
+	fp = popen(SHELL_CMD_TURN_AMPLI_OFF, "r");
+	if (fp != NULL) {
+		pclose(fp);
+	}
 
 	char *home = getenv("HOME");
 	if (home == NULL) {

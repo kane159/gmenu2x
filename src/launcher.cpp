@@ -32,9 +32,13 @@ Launcher::Launcher(vector<string> && commandLine, bool consoleApp)
 
 void Launcher::exec()
 {
+	FILE *fp;
 
-    /* Start audio amp */
-    popen(SHELL_CMD_TURN_AMPLI_ON, "r");
+	/* Start audio amp */
+	fp = popen(SHELL_CMD_TURN_AMPLI_ON, "r");
+	if (fp != NULL) {
+		pclose(fp);
+	}
 
 	if (consoleApp) {
 #ifdef BIND_CONSOLE
