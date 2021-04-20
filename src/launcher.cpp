@@ -35,10 +35,7 @@ void Launcher::exec()
 	FILE *fp;
 
 	/* Start audio amp */
-	fp = popen(SHELL_CMD_TURN_AMPLI_ON, "r");
-	if (fp != NULL) {
-		pclose(fp);
-	}
+	system(SHELL_CMD_TURN_AMPLI_ON);
 
 	if (consoleApp) {
 #ifdef BIND_CONSOLE
