@@ -91,16 +91,16 @@ int MessageBox::exec() {
 	}
 	gmenu2x.font->write(bg, text, box.x + TEXT_PADDING + (gmenu2x.sc[icon] ? ICON_PADDING + ICON_DIMENSION : 0), box.y + (box.h - textHeight) / 2, Font::HAlignLeft, Font::VAlignTop);
 
-	int btnX = box.x - 6;
+	int btnX = gmenu2x.width() / 2 + box.w / 2 - 6;
 	for (size_t i = 0; i < InputManager::BUTTON_TYPE_SIZE; i++) {
 		if (!buttons[i].empty()) {
-			buttonPositions[i].y = box.y+box.h+8;
+			buttonPositions[i].y = box.y +box.h + gmenu2x.font->getTextHeight(text) / 2 - 4;
 			buttonPositions[i].w = btnX;
 
 			btnX = gmenu2x.drawButtonRight(bg, buttonLabels[i], buttons[i], btnX, buttonPositions[i].y);
 
 			buttonPositions[i].x = btnX;
-			buttonPositions[i].w = buttonPositions[i].x-btnX-6;
+			buttonPositions[i].w = buttonPositions[i].x - btnX - 6;
 		}
 	}
 
