@@ -188,7 +188,7 @@ int main(int /*argc*/, char * /*argv*/[]) {
 	set_handler(SIGUSR1, &handle_sigusr1);
 
 	/* Stop Ampli */
-	fp = popen(SHELL_CMD_TURN_AMPLI_OFF, "r");
+	fp = popen(SHELL_CMD_AUDIO_AMP_OFF, "r");
 	if (fp != NULL) {
 		pclose(fp);
 	}
