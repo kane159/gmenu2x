@@ -996,8 +996,8 @@ int FunkeyMenu::launch( )
 								menu_screen_refresh(menuItem, prevItem, scroll, menu_confirmation, 1);
 
 								/// ----- Shell cmd ----
-								MENU_DEBUG_PRINTF("Running command: %s\n", SHELL_CMD_SET_LAUNCHER_RETROFE);
-								executeRawPath(SHELL_CMD_SET_LAUNCHER_RETROFE);
+								MENU_DEBUG_PRINTF("Running command: %s\n", SHELL_CMD_FRONTEND_SET_RETROFE);
+								executeRawPath(SHELL_CMD_FRONTEND_SET_RETROFE);
 
 								stop_menu_loop = 1;
 								returnCode = MENU_RETURN_EXIT;
