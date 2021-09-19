@@ -326,6 +326,9 @@ GMenu2X::GMenu2X() : input(*this), sc(this)
 
     // Init FunkeyMenu
     FunkeyMenu::init( *this );
+	
+	// Turn audio amp off to avoid buzzing sound
+	system(SHELL_CMD_AUDIO_AMP_OFF);
 
 	//powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
 }

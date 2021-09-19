@@ -827,6 +827,8 @@ int FunkeyMenu::launch( )
 							/// ----- Shell cmd ----
 							sprintf(shell_cmd, "%s %d", SHELL_CMD_VOLUME_SET, volume_percentage);
 							system(shell_cmd);
+							// Turn audio amp off to avoid buzzing sound
+							system(SHELL_CMD_AUDIO_AMP_OFF);
 
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
@@ -883,6 +885,8 @@ int FunkeyMenu::launch( )
 							/// ----- Shell cmd ----
 							sprintf(shell_cmd, "%s %d", SHELL_CMD_VOLUME_SET, volume_percentage);
 							system(shell_cmd);
+							// Turn audio amp off to avoid buzzing sound
+							system(SHELL_CMD_AUDIO_AMP_OFF);
 
 							/// ------ Refresh screen ------
 							screen_refresh = 1;
