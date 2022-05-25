@@ -754,10 +754,10 @@ void GMenu2X::showSettings() {
 			*this, tr["Language"],
 			tr["Set the language used by GMenu2X"],
 			&lang, &translations)));
-	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingBool(
+	/*sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingBool(
 			*this, tr["Save last selection"],
 			tr["Save the last selected link and section on exit"],
-			&confInt["saveSelection"])));
+			&confInt["saveSelection"])));*/
 	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingBool(
 			*this, tr["Output logs"],
 			tr["Logs the output of the links. Use the Log Viewer to read them."],
@@ -766,28 +766,28 @@ void GMenu2X::showSettings() {
 			*this, tr["Trim extensions"],
 			tr["Trim extensions in the file explorer."],
 			&confInt["trimExt"])));
-	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
+	/*sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			*this, tr["Screen Timeout"],
 			tr["Set screen's backlight timeout in seconds"],
-			&confInt["backlightTimeout"], 0, 120)));
+			&confInt["backlightTimeout"], 0, 120)));*/
 	sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 			*this, tr["Button repeat rate"],
 			tr["Set button repetitions per second"],
 			&confInt["buttonRepeatRate"], 0, 20)));
-	if (brightnessmanager->available()) {
+	/*if (brightnessmanager->available()) {
 		sd.addSetting(unique_ptr<MenuSetting>(new MenuSettingInt(
 				*this, tr["Brightness level"],
 				tr["Set the brightness level"],
 				&confInt["brightnessLevel"],
 				1, brightnessmanager->maxBrightness())));
-	}
+	}*/
 
 	if (sd.exec()) {
 		//powerSaver->setScreenTimeout(confInt["backlightTimeout"]);
 
 		input.repeatRateChanged();
-		if (brightnessmanager->available())
-			brightnessmanager->setBrightness(confInt["brightnessLevel"]);
+		/*if (brightnessmanager->available())
+			brightnessmanager->setBrightness(confInt["brightnessLevel"]);*/
 
 		if (lang == "English") lang = "";
 		if (lang != tr.lang()) {
