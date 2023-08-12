@@ -32,11 +32,11 @@
 #define MENU_BG_SQURE_WIDTH         180
 #define MENU_BG_SQUREE_HEIGHT       140
 
-#define MENU_FONT_NAME_TITLE        "/usr/games/menu_resources/OpenSans-Bold.ttf"
+#define MENU_FONT_NAME_TITLE        "/usr/games/layouts/Bigcup/unifont-15.0.01.ttf"
 #define MENU_FONT_SIZE_TITLE        22
-#define MENU_FONT_NAME_INFO         "/usr/games/menu_resources/OpenSans-Bold.ttf"
+#define MENU_FONT_NAME_INFO         "/usr/games/layouts/Bigcup/unifont-15.0.01.ttf"
 #define MENU_FONT_SIZE_INFO         16
-#define MENU_FONT_NAME_SMALL_INFO   "/usr/games/menu_resources/OpenSans-Regular.ttf"
+#define MENU_FONT_NAME_SMALL_INFO   "/usr/games/layouts/Bigcup/unifont-15.0.01.ttf"
 #define MENU_FONT_SIZE_SMALL_INFO   13
 #define MENU_PNG_BG_PATH            "/usr/games/menu_resources/zone_bg.png"
 #define MENU_PNG_ARROW_TOP_PATH     "/usr/games/menu_resources/arrow_top.png"
@@ -285,7 +285,7 @@ void FunkeyMenu::add_menu_zone(ENUM_MENU_TYPE menu_type){
 	case MENU_TYPE_VOLUME:
 		MENU_DEBUG_PRINTF("Init MENU_TYPE_VOLUME\n");
 		/// ------ Text ------
-		text_surface = TTF_RenderText_Blended(menu_title_font, "VOLUME", text_color);
+		text_surface = TTF_RenderUTF8_Blended(menu_title_font, "音量", text_color);
 		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 - padding_y_from_center_menu_zone;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
@@ -298,7 +298,7 @@ void FunkeyMenu::add_menu_zone(ENUM_MENU_TYPE menu_type){
 	case MENU_TYPE_BRIGHTNESS:
 		MENU_DEBUG_PRINTF("Init MENU_TYPE_BRIGHTNESS\n");
 		/// ------ Text ------
-		text_surface = TTF_RenderText_Blended(menu_title_font, "BRIGHTNESS", text_color);
+		text_surface = TTF_RenderUTF8_Blended(menu_title_font, "亮度", text_color);
 		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 - padding_y_from_center_menu_zone;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
@@ -351,7 +351,7 @@ void FunkeyMenu::add_menu_zone(ENUM_MENU_TYPE menu_type){
 	case MENU_TYPE_LAUNCHER:
 		MENU_DEBUG_PRINTF("Init MENU_TYPE_LAUNCHER\n");
 		/// ------ Text ------
-		text_surface = TTF_RenderText_Blended(menu_title_font, "SET LAUNCHER", text_color);
+		text_surface = TTF_RenderUTF8_Blended(menu_title_font, "設置前端", text_color);
 		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 - padding_y_from_center_menu_zone*2;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
@@ -364,7 +364,7 @@ void FunkeyMenu::add_menu_zone(ENUM_MENU_TYPE menu_type){
 	case MENU_TYPE_POWERDOWN:
 		MENU_DEBUG_PRINTF("Init MENU_TYPE_POWERDOWN\n");
 		/// ------ Text ------
-		text_surface = TTF_RenderText_Blended(menu_title_font, "POWERDOWN", text_color);
+		text_surface = TTF_RenderUTF8_Blended(menu_title_font, "關閉電源", text_color);
 		text_pos.x = (surface->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 		text_pos.y = surface->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2;
 		SDL_BlitSurface(text_surface, NULL, surface, &text_pos);
@@ -593,22 +593,22 @@ void FunkeyMenu::menu_screen_refresh(int menuItem, int prevItem, int scroll, uin
 
 		case MENU_TYPE_USB:
 			/// ---- Write slot -----
-			sprintf(text_tmp, "%s USB", usb_sharing?"EJECT":"MOUNT");
-			text_surface = TTF_RenderText_Blended(menu_title_font, text_tmp, text_color);
+			sprintf(text_tmp, "%s USB", usb_sharing?"卸載":"掛載");
+			text_surface = TTF_RenderUTF8_Blended(menu_title_font, text_tmp, text_color);
 			text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 			text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2;
 			SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
 
 			if(menu_action){
-				sprintf(text_tmp, "in progress ...");
-				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+				sprintf(text_tmp, "執行中 ...");
+				text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 				text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
 			}
 			else if(menu_confirmation){
-				sprintf(text_tmp, "Are you sure ?");
-				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+				sprintf(text_tmp, "是否確定 ?");
+				text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 				text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
@@ -620,15 +620,15 @@ void FunkeyMenu::menu_screen_refresh(int menuItem, int prevItem, int scroll, uin
 
 		case MENU_TYPE_LAUNCHER:
 			if(menu_action){
-				sprintf(text_tmp, "In progress...");
-				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+				sprintf(text_tmp, "執行中...");
+				text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 				text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
 			}
 			else if(menu_confirmation){
-				sprintf(text_tmp, "Are you sure ?");
-				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+				sprintf(text_tmp, "是否確定 ?");
+				text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 				text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
@@ -638,16 +638,16 @@ void FunkeyMenu::menu_screen_refresh(int menuItem, int prevItem, int scroll, uin
 		case MENU_TYPE_EXIT:
 		case MENU_TYPE_POWERDOWN:
 			if(menu_action){
-				sprintf(text_tmp, "Shutting down...");
-				text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+				sprintf(text_tmp, "正在關閉...");
+				text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 				text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 				text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 				SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
 			}
 			else{
 				if(menu_confirmation){
-					sprintf(text_tmp, "Are you sure ?");
-					text_surface = TTF_RenderText_Blended(menu_info_font, text_tmp, text_color);
+					sprintf(text_tmp, "是否確定 ?");
+					text_surface = TTF_RenderUTF8_Blended(menu_info_font, text_tmp, text_color);
 					text_pos.x = (draw_screen->w - MENU_ZONE_WIDTH)/2 + (MENU_ZONE_WIDTH - text_surface->w)/2;
 					text_pos.y = draw_screen->h - MENU_ZONE_HEIGHT/2 - text_surface->h/2 + 2*padding_y_from_center_menu_zone;
 					SDL_BlitSurface(text_surface, NULL, draw_screen, &text_pos);
